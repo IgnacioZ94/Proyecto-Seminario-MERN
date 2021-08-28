@@ -1,6 +1,9 @@
 const express = require('express');
 const morgan = require('morgan');
+const path = require('path');
 const app = express();
+
+const { mongoose } = require('./database');
 
 // Settings
 //Definimos valor del puerto
@@ -14,8 +17,9 @@ app.use(express.json()); //Cada dato que pase por el servidor va a corroborar qu
 // Routes o URLs
 app.use('/api/tasks', require('./routes/task.routes'));
 
-// Satatic files
-
+// Satatic files - Se busca el index.html a la carpeta public y se muestra en front
+app.use(express.static(path.join(__dirname, 'public')));
+//console.log(path.join(__dirname, 'public'));//Constante __dirname da la ruta del archivo
 
 // Staring the server
 app.listen(app.set('port'), () => { //Obetenemos valor del puerto
