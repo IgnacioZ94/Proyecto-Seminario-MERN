@@ -1,36 +1,45 @@
 const express = require('express');
-const router =  express.Router(); //Libreria de express usada para crear rutas
-
+const router =  express.Router(); ///Libreria de express usada para crear rutas
 const Task = require('../models/task');
 
-//Creamos una ruta a travez del get,  para dar una respuesta desde el servidor
-router.get('/', async (req, res) => {
-    const tasks = await Task.find();
-    res.json(tasks);    
-});
+const { getTasks, createTask, getTask, deleteTask, updateTask } = require('../controllers/tasks.controller')
 
-router.get('/:id', async (req, res) => {
-    const task = await Task.findById(req.params.id);
-    res.json(task);
-});
+router.route('/')
+    .get(getTasks)
+    .post(createTask);
+//Logica de get para notas, sin usar los controllers
+//router.get('/', async (req, res) => {
+//    const tasks = await Task.find();
+//    res.json(tasks);    
+//});
+//Logica de post para notas, sin usar los controllers
+//router.post('/', async (req, res) => {
+//    const { title, description } = req.body;
+//    const task = new Task({title, description});
+//    await task.save();
+//    res.json({status: 'Task Saved'});
+//});
 
-router.post('/', async (req, res) => {
-    const { title, description } = req.body;
-    const task = new Task({title, description});
-    await task.save();
-    res.json({status: 'Task Saved'});
-});
-
-router.put('/:id', async (req, res) => {
-    const { title, description } = req.body;
-    const newTask = {title, description};
-    await Task.findByIdAndUpdate(req.params.id, newTask);
-    res.json({status: "Task Updated"});
-});
-
-router.delete('/:id', async (req, res) => {
-    await Task.findByIdAndRemove(req.params.id);
-    res.json({status: "Task Delete"});
-});
+router.route('/:id')
+    .get(getTask)
+    .put(updateTask)
+    .delete(deleteTask);
+//Logica de get id para notas, sin usar los controllers
+//router.get('/:id', async (req, res) => {
+//    const task = await Task.findById(req.params.id);
+//    res.json(task);
+//});
+//Logica de put id para notas, sin usar los controllers
+//router.put('/:id', async (req, res) => {
+//    const { title, description } = req.body;
+//    const newTask = {title, description};
+//    await Task.findByIdAndUpdate(req.params.id, newTask);
+//    res.json({status: "Task Updated"});
+//});
+//Logica de delete id para notas, sin usar los controllers
+//router.delete('/:id', async (req, res) => {
+//    await Task.findByIdAndRemove(req.params.id);
+//    res.json({status: "Task Delete"});
+//});
 
 module.exports = router;
