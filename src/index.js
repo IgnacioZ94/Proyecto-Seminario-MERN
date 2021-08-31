@@ -18,6 +18,7 @@ app.use(express.json()); //Cada dato que pase por el servidor va a corroborar qu
 
 
 // Routes o URLs
+//      ruta http       -      rutas locales de los js que contienen la logica de las rutas
 app.use('/api/users', require('./routes/users.routes'))
 app.use('/api/tasks', require('./routes/task.routes'))
 

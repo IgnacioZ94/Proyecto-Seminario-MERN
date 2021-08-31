@@ -2,7 +2,7 @@ const express = require('express');
 const { get } = require('mongoose');
 const router =  express.Router(); //Libreria de express usada para crear rutas
 
-const { getUsers, createUser, getUser, updateUser, deleteUser } = require('../controllers/users.controller');
+const { getUsers, createUser, getUser, deleteUser } = require('../controllers/users.controller');
 
 router.route('/')
     .get(getUsers)
@@ -14,7 +14,6 @@ router.route('/')
 
 router.route('/:id')
     .get(getUser)
-    .put(updateUser)
     .delete(deleteUser);
 //Logica de getID putID y deleteID para notas, sin usar los controllers
 //router.route('/:id')
