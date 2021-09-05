@@ -8,7 +8,7 @@ const { mongoose } = require('./database');
 
 // Settings
 //Definimos valor del puerto
-app.set('port', process.env.PORT || 3000); 
+app.set('port', process.env.PORT || 4000); 
 
 
 // Middlewares-Funciones que se ejecutan antes de que lleguen a las rutas
